@@ -1,5 +1,7 @@
 """Letter frequencies by language"""
 
+"""The following table is from https://en.wikipedia.org/wiki/Letter_frequency,
+and is attributed to Robert Lewand's Cryptological Mathematics."""
 ENGLISH_FREQ = {
     'e': 12.702,
     't': 9.056,

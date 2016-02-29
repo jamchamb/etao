@@ -2,10 +2,17 @@
 import math
 from .frequencies import ENGLISH_FREQ
 
+# Non-alphabetic ASCII characters
+NON_ALPHAS = ''.join(c for c in map(chr, range(256)) if not c.isalpha())
 
-def char_frequency(text):
+
+def char_frequency(text, only_alpha=False):
     """Return a table of character frequencies in the text.
-       Case insensitive."""
+       Case insensitive; includes non-alphabetic characters
+       by default."""
+
+    if only_alpha:
+        text = text.translate(None, NON_ALPHAS)
 
     text_count = {}
     for char in text:
@@ -41,7 +48,12 @@ def cosine_similarity(left_vector, right_vector):
 
 
 def score_text(text, freq=ENGLISH_FREQ):
-    """Score how well a text matches a given frequency table."""
+    """Score how well a text matches a given frequency table.
+    Case insensitive. Uses English letter frequency by default.
+    Only characters with an entry in the frequency table are considered.
+    The result is the cosine similarity of the frequency tables of the text
+    and the language, where a value of 1 indicates most similar and
+    a value of -1 indicates least similar."""
 
     if len(text) == 0:
         return 0
@@ -50,7 +62,7 @@ def score_text(text, freq=ENGLISH_FREQ):
 
     for k in freq.keys():
         if k != k.lower():
-            raise Exception("Only use lower-case keys for frequency table")
+            raise ValueError("Only use lower-case keys for frequency table")
 
     text_freq = char_frequency(text)
 
@@ -58,8 +70,8 @@ def score_text(text, freq=ENGLISH_FREQ):
     text_vector = []
     freq_vector = []
     for k in freq.keys():
+        freq_vector.append(freq.get(k))
         text_vector.append(text_freq.get(k) or 0.0)
-        freq_vector.append(freq.get(k) or 0.0)
 
     return cosine_similarity(text_vector, freq_vector)
 
