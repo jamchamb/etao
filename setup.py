@@ -1,12 +1,12 @@
+import os
 from setuptools import setup
-import pypandoc
 
-long_description = pypandoc.convert('README.md', 'rst')
-long_description = long_description.replace('\r', '')
+long_description = open(
+    os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 
 setup(
     name='etao',
-    version='0.1.0',
+    version='0.2.0',
 
     description='Simple cryptanalysis library',
     long_description=long_description,
@@ -18,8 +18,18 @@ setup(
 
     license='GPLv3',
 
-    keywords='cryptography cryptanalysis ciphers',
+    keywords=[
+        'cryptography',
+        'cryptanalysis',
+        'ciphers'
+    ],
+
+    test_suite='nose2.collector.collector',
 
     packages=['etao'],
+    install_requires=[
+        'nose2>=0.6.2',
+        'six>=1.10.0'
+    ],
     zip_safe=False
 )

@@ -1,4 +1,8 @@
 """General cryptography/cryptanalysis functions."""
+
+# Disable "unused imports" nags
+# flake8: noqa
+
 from .pen import (letter_to_num, num_to_letter,
                   caesar_shift_letter, caesar_shift)
 from .analysis import char_frequency, score_text, hamming_distance

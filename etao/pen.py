@@ -9,7 +9,7 @@ def letter_to_num(letter):
         raise TypeError("Expected a string")
 
     if letter not in string.ascii_letters:
-        raise ValueError("Expected an ASCII letter")
+        raise ValueError("Expected a single ASCII letter")
 
     return ord(letter.upper()) - ord('A') + 1
 

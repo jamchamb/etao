@@ -31,7 +31,7 @@ def cosine_similarity(left_vector, right_vector):
     """Compute cosine similarity of two vectors.
 
     (v1 dot v1)/{||v1||*||v2||)
-    http://stackoverflow.com/questions/18424228/cosine-similarity-between-2-number-lists"""
+    http://stackoverflow.com/questions/18424228"""
 
     sumxx, sumxy, sumyy = 0, 0, 0
     for i in range(len(left_vector)):
