@@ -24,3 +24,28 @@ def num_to_letter(num):
         raise ValueError("Expected an integer between 1 and 26 (inclusive)")
 
     return chr(num-1 + ord('A'))
+
+
+def caesar_shift_letter(letter, shift):
+    """Return the Caesar shifted letter."""
+
+    if shift < 0:
+        raise ValueError("Expected a positive shift value")
+    shift %= 26
+
+    num = letter_to_num(letter) - 1
+    num = ((num + shift) % 26) + 1
+
+    return num_to_letter(num)
+
+
+def caesar_shift(text, shift):
+    """Return the Caesar shifted text."""
+
+    result = ""
+    for i in range(len(text)):
+        if text[i] in string.ascii_letters:
+            result += caesar_shift_letter(text[i], shift)
+        else:
+            result += text[i]
+    return result
