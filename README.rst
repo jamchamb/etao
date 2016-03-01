@@ -10,5 +10,6 @@ Simple cryptanalysis library.
 Installation
 ------------
 Install with pip::
+
     pip install etao
 
