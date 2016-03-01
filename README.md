@@ -4,5 +4,5 @@ etao
 
 Simple cryptanalysis library.
 
-# Installation
+## Installation
 `pip install etao`
