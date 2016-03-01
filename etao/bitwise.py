@@ -9,6 +9,12 @@ def hex_to_bytes(hex_string):
     return binascii.unhexlify(hex_string)
 
 
+def bytes_to_hex(byte_string):
+    """Convert a string of bytes into hexadecimal string representation."""
+
+    return binascii.hexlify(byte_string)
+
+
 def bytes_to_b64(input_bytes):
     """Return base64 encoding of bytes."""
 
