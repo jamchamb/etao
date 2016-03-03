@@ -78,5 +78,48 @@ class TestCaesar(unittest.TestCase):
         with self.assertRaises(TypeError):
             etao.caesar_shift(123, 0)
 
+
+class TestVigenere(unittest.TestCase):
+
+    def test_vigenere_encrypt(self):
+        self.assertEqual(
+            etao.vigenere_encrypt('ATTACKATDAWN', 'LEMON'),
+            'LXFOPVEFRNHR'
+        )
+
+    def test_vigenere_decrypt(self):
+        self.assertEqual(
+            etao.vigenere_decrypt('LXFOPVEFRNHR', 'LEMON'),
+            'ATTACKATDAWN'
+        )
+
+    def test_vigenere_encrypt_with_symbols(self):
+        self.assertEqual(
+            etao.vigenere_encrypt('ATTACK AT DAWN!', 'LEMON'),
+            'LXFOPV EF RNHR!'
+        )
+
+    def test_vigenere_decrypt_with_symbols(self):
+        self.assertEqual(
+            etao.vigenere_decrypt('LXFOPV EF RNHR!', 'LEMON'),
+            'ATTACK AT DAWN!'
+        )
+
+    def test_vigenere_encrypt_mixcase(self):
+        self.assertEqual(
+            etao.vigenere_encrypt('AtTackaTdAWn', 'lEmOn'),
+            'LXFOPVEFRNHR'
+        )
+
+    def test_vigenere_decrypt_mixcase(self):
+        self.assertEqual(
+            etao.vigenere_decrypt('lxFoPVefRNhR', 'leMoN'),
+            'ATTACKATDAWN'
+        )
+
+    def test_vigenere_bad_key_symbol(self):
+        with self.assertRaises(ValueError):
+            etao.vigenere_encrypt('ATTACKATDAWN', 'LEMON!')
+
 if __name__ == "__main__":
     unittest.main()
