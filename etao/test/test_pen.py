@@ -46,6 +46,7 @@ class TestLetterNum(unittest.TestCase):
 
 
 class TestCaesar(unittest.TestCase):
+    """Test Caesar cipher."""
 
     # Single letter shift section
     def test_shift_letter_min(self):
@@ -80,6 +81,7 @@ class TestCaesar(unittest.TestCase):
 
 
 class TestVigenere(unittest.TestCase):
+    """Test Vigenere cipher."""
 
     def test_vigenere_encrypt(self):
         self.assertEqual(
@@ -120,6 +122,48 @@ class TestVigenere(unittest.TestCase):
     def test_vigenere_bad_key_symbol(self):
         with self.assertRaises(ValueError):
             etao.vigenere_encrypt('ATTACKATDAWN', 'LEMON!')
+
+
+class TestCompleteAlphabet(unittest.TestCase):
+    """Test alphabet key completion."""
+
+    def test_complete(self):
+        self.assertEqual(
+            etao.complete_alphabet("ZEBRAS"),
+            "ZEBRASCDFGHIJKLMNOPQTUVWXY"
+        )
+
+    def test_already_complete(self):
+        self.assertEqual(
+            etao.complete_alphabet("ZEBRASCDFGHIJKLMNOPQTUVWXY"),
+            "ZEBRASCDFGHIJKLMNOPQTUVWXY"
+        )
+
+    def test_non_alpha(self):
+        with self.assertRaises(ValueError):
+            etao.complete_alphabet("ABC123")
+
+    def test_duplicate_letters(self):
+        with self.assertRaises(ValueError):
+            etao.complete_alphabet("ABCZZZZ")
+
+
+class TestSimpleSubstitution(unittest.TestCase):
+    """Test simple substitution cipher."""
+
+    def test_encrypt(self):
+        self.assertEqual(
+            etao.simple_sub_encrypt("So long, and thanks for all the fish!",
+                                    "DOLPHINS"),
+            "RJ EJGN, DGP TSDGCR IJQ DEE TSH IARS!"
+        )
+
+    def test_decrypt(self):
+        self.assertEqual(
+            etao.simple_sub_decrypt("RJ EJGN, DGP TSDGCR IJQ DEE TSH IARS!",
+                                    "DOLPHINS"),
+            "SO LONG, AND THANKS FOR ALL THE FISH!"
+        )
 
 if __name__ == "__main__":
     unittest.main()

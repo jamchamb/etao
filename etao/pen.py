@@ -26,6 +26,26 @@ def num_to_letter(num):
     return chr(num-1 + ord('A'))
 
 
+def complete_alphabet(key):
+    """Complete the alphabetic key by appending unused letters
+       in alphabetic order."""
+
+    key = key.upper()
+
+    if not key.isalpha():
+        raise ValueError("The key must only contain letters")
+    elif len(key) != len(set(key)):
+        raise ValueError("The key must not contain duplicate letters")
+    elif len(key) == 26:
+        return key.upper()
+
+    for letter in string.ascii_uppercase:
+        if letter not in key:
+            key += letter
+
+    return key
+
+
 def caesar_shift_letter(letter, shift):
     """Return the Caesar shifted letter."""
 
@@ -80,6 +100,54 @@ def vigenere_decrypt(ciphertext, key):
             shift = 26 - (letter_to_num(key[key_index % len(key)]) - 1)
             key_index += 1
             result += caesar_shift_letter(char, shift)
+        else:
+            result += char
+
+    return result
+
+
+def simple_sub_encrypt(plaintext, key):
+    """Return the ciphertext produced by encrypting the given plaintext
+       with the simple substitution cipher (monoalphabetic), using the
+       given key.
+
+       The key must consist of distinct letters. Unused letters will
+       automatically be appended to the end of the key in alphabetic
+       order."""
+
+    # Check the key and complete it, if necessary
+    key = complete_alphabet(key)
+
+    result = ""
+    for char in plaintext:
+        if char in string.ascii_letters:
+            char = char.upper()
+            sub = key[letter_to_num(char) - 1]
+            result += sub
+        else:
+            result += char
+
+    return result
+
+
+def simple_sub_decrypt(ciphertext, key):
+    """Return the plaintext produced by decrypting the given ciphertext
+       with the simple substitution cipher (monoalphabetic), using the
+       given key.
+
+       The key must consist of distinct letters. Unused letters will
+       automatically be appended to the end of the key in alphabetic
+       order."""
+
+    # Check the key and complete it, if necessary
+    key = complete_alphabet(key)
+
+    result = ""
+    for char in ciphertext:
+        if char in string.ascii_letters:
+            char = char.upper()
+            sub = num_to_letter(key.index(char) + 1)
+            result += sub
         else:
             result += char
 
