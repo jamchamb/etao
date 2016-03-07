@@ -1,2 +1,11 @@
 # Include the license
 include LICENSE
+
+# Include pip freeze
+include requirements.txt
+
+# Include test files
+recursive-include etao *.py
+
+# Exclude example programs
+recursive-exclude examples *
