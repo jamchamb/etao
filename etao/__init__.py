@@ -1,5 +1,4 @@
-"""General cryptography/cryptanalysis functions."""
-
+"""Simple cryptanalysis library."""
 # Disable "unused imports" nags
 # flake8: noqa
 
