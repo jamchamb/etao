@@ -14,8 +14,14 @@ class TestEncoding(unittest.TestCase):
     def test_btb64(self):
         self.assertEqual(etao.bytes_to_b64('ETAOINSHRDLU'), 'RVRBT0lOU0hSRExV')
 
+    def test_b64tb(self):
+        self.assertEqual(etao.b64_to_bytes('RVRBT0lOU0hSRExV'), 'ETAOINSHRDLU')
+
     def test_htb64(self):
         self.assertEqual(etao.hex_to_b64('4554414f'), 'RVRBTw==')
+
+    def test_b64th(self):
+        self.assertEqual(etao.b64_to_hex('RVRBTw=='), '4554414f')
 
 
 class TestEncrypting(unittest.TestCase):
