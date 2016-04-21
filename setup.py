@@ -6,7 +6,7 @@ long_description = open(
 
 setup(
     name='etao',
-    version='0.3.0',
+    version='0.4.0',
 
     description='Simple cryptanalysis library',
     long_description=long_description,
@@ -27,9 +27,6 @@ setup(
     test_suite='nose2.collector.collector',
 
     packages=['etao'],
-    install_requires=[
-        'nose2>=0.6.2',
-        'six>=1.10.0'
-    ],
+    install_requires=[],
     zip_safe=False
 )
