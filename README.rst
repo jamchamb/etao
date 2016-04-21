@@ -1,9 +1,9 @@
 etao
 ====
-.. image:: https://travis-ci.org/jamchamb/etao.svg?branch=master
-    :target: https://travis-ci.org/jamchamb/etao
 .. image:: https://badge.fury.io/py/etao.svg
     :target: https://badge.fury.io/py/etao
+.. image:: https://travis-ci.org/jamchamb/etao.svg?branch=master
+    :target: https://travis-ci.org/jamchamb/etao
 .. image:: https://img.shields.io/codecov/c/github/jamchamb/etao.svg?maxAge=2592000
    :target: https://codecov.io/github/jamchamb/etao
 
