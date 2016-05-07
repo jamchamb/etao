@@ -34,6 +34,13 @@ class TestEncoding(unittest.TestCase):
         bit_array = [int(c) for c in '0100100001101001']
         self.assertEqual(etao.bits_to_bytes(bit_array), 'Hi')
 
+    def test_bits_per_byte(self):
+        self.assertEqual(etao.bits_to_bytes('1001010', bpb=7), 'J')
+
+    def test_bits_per_byte_bad(self):
+        with self.assertRaises(ValueError):
+            self.assertEqual(etao.bits_to_bytes('1001010', bpb=6), 'J')
+
     def test_bytbi(self):
         bit_array = [int(c) for c in '0100100001101001']
         self.assertEqual(etao.bytes_to_bits('Hi'), bit_array)

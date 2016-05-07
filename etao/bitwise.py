@@ -90,7 +90,7 @@ def bits_to_bytes(bit_array, bpb=8):
     """Convert an array or string of bits to bytes."""
 
     if len(bit_array) % bpb != 0:
-        raise ValueError("Number of bits must be a multiple of " + bpb)
+        raise ValueError("Number of bits must be a multiple of " + str(bpb))
 
     result = ""
     for i in range(0, len(bit_array), bpb):
