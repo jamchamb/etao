@@ -20,6 +20,12 @@ class TestFrequency(unittest.TestCase):
             {'a': 0.75, 'b': 0.25}
         )
 
+    def test_ngram_freq(self):
+        self.assertEqual(
+            etao.ngram_frequency('the', 2),
+            {'th': 0.5, 'he': 0.5}
+        )
+
     def test_score_identical(self):
         self.assertEqual(
             etao.score_text('ABCD',

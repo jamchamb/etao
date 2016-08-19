@@ -11,18 +11,31 @@ def char_frequency(text, only_alpha=False):
        Case insensitive; includes non-alphabetic characters
        by default."""
 
+    return ngram_frequency(text, 1, only_alpha)
+
+
+def ngram_frequency(text, length, only_alpha=False):
+    """Return a table of n-gram frequencies in the text.
+       Case insensitive; includes non-alphabetic characters
+       by default."""
+
     if only_alpha:
         text = text.translate(None, NON_ALPHAS)
 
-    text_count = {}
-    for char in text:
-        if char.lower() in text_count:
-            text_count[char.lower()] += 1
+    text = text.lower()
+
+    # Get all substrings of desired length (n-grams)
+    ngrams = [text[i:i+length] for i in range(len(text) - (length - 1))]
+
+    ngram_count = {}
+    for ngram in ngrams:
+        if ngram in ngram_count:
+            ngram_count[ngram] += 1
         else:
-            text_count[char.lower()] = 1
+            ngram_count[ngram] = 1
 
     # Get frequency for each character counted
-    text_freq = {x[0]: float(x[1])/len(text) for x in text_count.items()}
+    text_freq = {x[0]: float(x[1])/len(ngrams) for x in ngram_count.items()}
 
     return text_freq
 
@@ -53,11 +66,11 @@ def score_text(text, freq=ENGLISH_FREQ):
     Only characters with an entry in the frequency table are considered.
     The result is the cosine similarity of the frequency tables of the text
     and the language, where a value of 1 indicates most similar and
-    a value of -1 indicates least similar."""
+    a value of 0 indicates least similar."""
 
     if len(text) == 0:
         return 0
-    if len(freq) == 0:
+    elif len(freq) == 0:
         raise Exception("Empty frequency table")
 
     for k in freq.keys():
@@ -88,4 +101,5 @@ def hamming_distance(left_bytes, right_bytes):
         diff = ord(left_bytes[i]) ^ ord(right_bytes[i])
         for j in range(8):
             result += (diff >> j) & 1
+
     return result
