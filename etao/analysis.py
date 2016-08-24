@@ -3,7 +3,7 @@ import math
 from .frequencies import ENGLISH_FREQ
 
 # Non-alphabetic ASCII characters
-NON_ALPHAS = ''.join(c for c in map(chr, range(256)) if not c.isalpha())
+NON_ALPHAS = ''.join(chr(c) for c in range(256) if not chr(c).isalpha())
 
 
 def char_frequency(text, only_alpha=False):
