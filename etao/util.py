@@ -5,6 +5,7 @@ import binascii
 PRINTABLE = string.ascii_letters + string.digits + \
             string.punctuation + string.whitespace
 
+
 def escape_nonprintables(input_string):
     """Replace non-printable characters and line breaks in a string
        with escaped hex codes."""
