@@ -1,6 +1,6 @@
 """Frequency analysis, etc."""
 import math
-from .frequencies import ENGLISH_FREQ
+from .freq import ENGLISH_FREQ
 
 # Non-alphabetic ASCII characters
 NON_ALPHAS = ''.join(chr(c) for c in range(256) if not chr(c).isalpha())
@@ -71,13 +71,19 @@ def score_text(text, freq=ENGLISH_FREQ):
     if len(text) == 0:
         return 0
     elif len(freq) == 0:
-        raise Exception("Empty frequency table")
+        raise ValueError("Empty frequency table")
+
+    # Determine ngram length and ensure it's conistent throughout the table
+    ngram_length = len(freq.keys()[0])
 
     for k in freq.keys():
         if k != k.lower():
             raise ValueError("Only use lower-case keys for frequency table")
+        elif len(k) != ngram_length:
+            raise ValueError("All frequency table keys should have the " +
+                             "same length")
 
-    text_freq = char_frequency(text)
+    text_freq = ngram_frequency(text, ngram_length)
 
     # Get vector for each frequency table
     text_vector = []

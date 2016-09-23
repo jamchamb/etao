@@ -26,6 +26,18 @@ class TestFrequency(unittest.TestCase):
             {'th': 0.5, 'he': 0.5}
         )
 
+    def test_ngram_freq_only_alpha(self):
+        self.assertEqual(
+            etao.ngram_frequency('t h e!!', 2, only_alpha=True),
+            {'th': 0.5, 'he': 0.5}
+        )
+
+    def test_ngram_freq_symbols(self):
+        self.assertEqual(
+            etao.ngram_frequency('wow!', 2),
+            {'wo': 1/3.0, 'ow': 1/3.0, 'w!': 1/3.0}
+        )
+
     def test_score_identical(self):
         self.assertEqual(
             etao.score_text('ABCD',
@@ -42,9 +54,30 @@ class TestFrequency(unittest.TestCase):
             0.0
         )
 
+    def test_score_digrams(self):
+        self.assertEqual(
+            etao.score_text('the the',
+                            freq={
+                                'th': 0.5, 'he': 0.5
+                            }),
+            1.0
+            )
+
     def test_hamming(self):
         self.assertEqual(
             etao.hamming_distance('this is a test',
                                   'wokka wokka!!!'),
             37
         )
+
+    def test_score_empty_table(self):
+        with self.assertRaises(ValueError):
+            etao.score_text('swag', freq={})
+
+    def test_score_invalid_table(self):
+        with self.assertRaises(ValueError):
+            etao.score_text('swag', freq={'ayy': .2, 'lmao': 0.3})
+
+    def test_score_invalid_table_case(self):
+        with self.assertRaises(ValueError):
+            etao.score_text('swag', freq={'ayyy': .2, 'LMaO': 0.3})
