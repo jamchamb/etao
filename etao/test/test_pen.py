@@ -61,9 +61,8 @@ class TestCaesar(unittest.TestCase):
     def test_shift_letter_full(self):
         self.assertEqual(etao.caesar_shift_letter('A', 26), 'A')
 
-    def test_shift_letter_invalid_negative(self):
-        with self.assertRaises(ValueError):
-            etao.caesar_shift_letter('A', -1)
+    def test_shift_letter_negative(self):
+        self.assertEqual(etao.caesar_shift_letter('A', -1), 'Z')
 
     # Full text shift section
     def test_shift_text_min(self):
@@ -78,6 +77,13 @@ class TestCaesar(unittest.TestCase):
     def test_shift_text_invalid_type(self):
         with self.assertRaises(TypeError):
             etao.caesar_shift(123, 0)
+
+    # Caesar cipher class
+    def test_caesar_class(self):
+        caesar = etao.CaesarCipher(5)
+        pt = 'HELLO WORLD'
+        ct = caesar.encrypt(pt)
+        self.assertEqual(pt, caesar.decrypt(ct))
 
 
 class TestVigenere(unittest.TestCase):

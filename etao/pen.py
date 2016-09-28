@@ -49,8 +49,8 @@ def complete_alphabet(key):
 def caesar_shift_letter(letter, shift):
     """Return the Caesar shifted letter."""
 
-    if shift < 0:
-        raise ValueError("Expected a positive shift value")
+    while shift < 0:
+        shift += 26
     shift %= 26
 
     num = letter_to_num(letter) - 1
