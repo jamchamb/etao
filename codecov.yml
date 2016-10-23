@@ -1,0 +1,4 @@
+codecov:
+
+  ignore:
+    - etao/test/*

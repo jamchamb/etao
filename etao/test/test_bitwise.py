@@ -57,6 +57,10 @@ class TestBitExtraction(unittest.TestCase):
     def test_get_bit_char(self):
         self.assertEqual(etao.get_bit('A', 0), 1)
 
+    def test_get_bit_over_255(self):
+        with self.assertRaises(ValueError):
+            etao.get_bit(256, 0)
+
     def test_get_bit_under_min(self):
         with self.assertRaises(ValueError):
             etao.get_bit(0, -1)

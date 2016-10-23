@@ -70,6 +70,10 @@ class TestFrequency(unittest.TestCase):
             37
         )
 
+    def test_hamming_len_mismatch(self):
+        with self.assertRaises(ValueError):
+            etao.hamming_distance('abc', 'defg')
+
     def test_score_empty_table(self):
         with self.assertRaises(ValueError):
             etao.score_text('swag', freq={})
@@ -81,3 +85,7 @@ class TestFrequency(unittest.TestCase):
     def test_score_invalid_table_case(self):
         with self.assertRaises(ValueError):
             etao.score_text('swag', freq={'ayyy': .2, 'LMaO': 0.3})
+
+    def test_score_no_text(self):
+        self.assertEqual(etao.score_text('', freq={'e': 0.5}),
+                         0)
