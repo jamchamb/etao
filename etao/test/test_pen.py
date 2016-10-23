@@ -78,57 +78,6 @@ class TestCaesar(unittest.TestCase):
         with self.assertRaises(TypeError):
             etao.caesar_shift(123, 0)
 
-    # Caesar cipher class
-    def test_caesar_class(self):
-        caesar = etao.CaesarCipher(5)
-        pt = 'HELLO WORLD'
-        ct = caesar.encrypt(pt)
-        self.assertEqual(pt, caesar.decrypt(ct))
-
-
-class TestVigenere(unittest.TestCase):
-    """Test Vigenere cipher."""
-
-    def test_vigenere_encrypt(self):
-        self.assertEqual(
-            etao.vigenere_encrypt('ATTACKATDAWN', 'LEMON'),
-            'LXFOPVEFRNHR'
-        )
-
-    def test_vigenere_decrypt(self):
-        self.assertEqual(
-            etao.vigenere_decrypt('LXFOPVEFRNHR', 'LEMON'),
-            'ATTACKATDAWN'
-        )
-
-    def test_vigenere_encrypt_with_symbols(self):
-        self.assertEqual(
-            etao.vigenere_encrypt('ATTACK AT DAWN!', 'LEMON'),
-            'LXFOPV EF RNHR!'
-        )
-
-    def test_vigenere_decrypt_with_symbols(self):
-        self.assertEqual(
-            etao.vigenere_decrypt('LXFOPV EF RNHR!', 'LEMON'),
-            'ATTACK AT DAWN!'
-        )
-
-    def test_vigenere_encrypt_mixcase(self):
-        self.assertEqual(
-            etao.vigenere_encrypt('AtTackaTdAWn', 'lEmOn'),
-            'LXFOPVEFRNHR'
-        )
-
-    def test_vigenere_decrypt_mixcase(self):
-        self.assertEqual(
-            etao.vigenere_decrypt('lxFoPVefRNhR', 'leMoN'),
-            'ATTACKATDAWN'
-        )
-
-    def test_vigenere_bad_key_symbol(self):
-        with self.assertRaises(ValueError):
-            etao.vigenere_encrypt('ATTACKATDAWN', 'LEMON!')
-
 
 class TestCompleteAlphabet(unittest.TestCase):
     """Test alphabet key completion."""
@@ -153,23 +102,6 @@ class TestCompleteAlphabet(unittest.TestCase):
         with self.assertRaises(ValueError):
             etao.complete_alphabet("ABCZZZZ")
 
-
-class TestSimpleSubstitution(unittest.TestCase):
-    """Test simple substitution cipher."""
-
-    def test_encrypt(self):
-        self.assertEqual(
-            etao.simple_sub_encrypt("So long, and thanks for all the fish!",
-                                    "DOLPHINS"),
-            "RJ EJGN, DGP TSDGCR IJQ DEE TSH IARS!"
-        )
-
-    def test_decrypt(self):
-        self.assertEqual(
-            etao.simple_sub_decrypt("RJ EJGN, DGP TSDGCR IJQ DEE TSH IARS!",
-                                    "DOLPHINS"),
-            "SO LONG, AND THANKS FOR ALL THE FISH!"
-        )
 
 if __name__ == "__main__":
     unittest.main()

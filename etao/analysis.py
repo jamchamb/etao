@@ -99,7 +99,7 @@ def hamming_distance(left_bytes, right_bytes):
     """Get the binary Hamming distance between two sequences of bytes."""
 
     if len(left_bytes) != len(right_bytes):
-        raise Exception("Length of both sequences must match")
+        raise ValueError("Length of both sequences must match")
 
     result = 0
     for i in range(len(left_bytes)):

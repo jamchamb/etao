@@ -4,11 +4,10 @@
 
 from .pen import (letter_to_num, num_to_letter,
                   complete_alphabet,
-                  caesar_shift_letter, caesar_shift,
-                  simple_sub_encrypt, simple_sub_decrypt,
-                  vigenere_encrypt, vigenere_decrypt)
+                  caesar_shift_letter, caesar_shift)
 
-from .ciphers import CaesarCipher
+from .ciphers import (Cipher, CaesarCipher, VigenereCipher,
+                      SimpleSubstitutionCipher)
 
 from .analysis import char_frequency, ngram_frequency, score_text, hamming_distance
 
