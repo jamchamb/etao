@@ -9,9 +9,12 @@ from .pen import (letter_to_num, num_to_letter,
 from .ciphers import (Cipher, CaesarCipher, VigenereCipher,
                       SimpleSubstitutionCipher)
 
-from .codecs import (Codec, Transcoder, HexASCIICodec, Base64Codec, PKCS7PaddingCodec, BlockCodec)
+from .codecs import (Codec, Transcoder, HexASCIICodec, Base64Codec,
+                     PKCS7PaddingCodec, BlockCodec)
 
-from .analysis import char_frequency, ngram_frequency, score_text, hamming_distance
+from .analysis import char_frequency, ngram_frequency, hamming_distance
+
+from .scorers import NgramFrequencyScorer
 
 from .bitwise import (get_bit, get_bits,
                       bits_to_bytes, bytes_to_bits,
