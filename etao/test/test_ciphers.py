@@ -92,7 +92,3 @@ class TestSimpleSubstitutionCipher(unittest.TestCase):
                 "RJ EJGN, DGP TSDGCR IJQ DEE TSH IARS!"),
             "SO LONG, AND THANKS FOR ALL THE FISH!"
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

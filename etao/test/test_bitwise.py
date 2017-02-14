@@ -46,6 +46,3 @@ class TestEncrypting(unittest.TestCase):
             etao.xor_bytes('Hello, world!', 'ETAO'),
             '\x0d\x31\x2d\x23\x2a\x78\x61\x38\x2a\x26\x2d\x2b\x64'
         )
-
-if __name__ == "__main__":
-    unittest.main()

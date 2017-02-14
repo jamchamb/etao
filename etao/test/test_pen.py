@@ -101,7 +101,3 @@ class TestCompleteAlphabet(unittest.TestCase):
     def test_duplicate_letters(self):
         with self.assertRaises(ValueError):
             etao.complete_alphabet("ABCZZZZ")
-
-
-if __name__ == "__main__":
-    unittest.main()

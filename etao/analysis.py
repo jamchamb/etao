@@ -1,6 +1,5 @@
 """Frequency analysis, etc."""
 import math
-from .freq import ENGLISH_FREQ
 
 # Non-alphabetic ASCII characters
 NON_ALPHAS = ''.join(chr(c) for c in range(256) if not chr(c).isalpha())

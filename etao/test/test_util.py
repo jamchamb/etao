@@ -16,7 +16,3 @@ class TestNonPrintables(unittest.TestCase):
             etao.escape_nonprintables('ABCD\x00\xDE\xAD\xBE\xEF'),
             'ABCD\\x00\\xde\\xad\\xbe\\xef'
         )
-
-
-if __name__ == "__main__":
-    unittest.main()
