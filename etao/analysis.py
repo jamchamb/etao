@@ -17,8 +17,8 @@ def char_frequency(text, only_alpha=True):
 def ngram_frequency(text, length, only_alpha=True, preserve_format=True):
     """Return a table of n-gram frequencies in the text.
        Case insensitive; excludes non-alphabetic characters
-       by default. Preserves separation of characters by
-       whitespace by default when creating n-grams with
+       by default. Preserves separation of alphabetic characters by
+       non-alphbetic characters by default when creating n-grams with
        a length greater than one."""
 
     if only_alpha and not preserve_format:

@@ -42,7 +42,7 @@ class TestFrequency(unittest.TestCase):
 
     def test_ngram_freq_preserve_format(self):
         self.assertEqual(
-            etao.ngram_frequency('t h e!!', 2),
+            etao.ngram_frequency('t h.e!!', 2),
             {}
         )
 
