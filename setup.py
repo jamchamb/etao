@@ -6,7 +6,7 @@ long_description = open(
 
 setup(
     name='etao',
-    version='0.5.0',
+    version='0.6.0',
 
     description='Simple cryptanalysis library',
     long_description=long_description,
