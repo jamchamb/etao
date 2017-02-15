@@ -42,4 +42,4 @@ class NgramFrequencyScorer:
             freq_vector.append(self.freq.get(k))
             text_vector.append(text_freq.get(k) or 0.0)
 
-            return cosine_similarity(text_vector, freq_vector)
+        return cosine_similarity(text_vector, freq_vector)

@@ -25,11 +25,19 @@ class TestNgramFreqScorer(unittest.TestCase):
         )
 
     def test_score_digrams(self):
-        freq = {'th': 0.5, 'he': 0.5}
+        freq = {'th': 0.25, 'he': 0.5, 'en': 0.25}
         scorer = etao.NgramFrequencyScorer(freq)
         self.assertEqual(
-            scorer.score('the the'),
+            scorer.score('the hen'),
             1.0
+        )
+
+    def test_score_digrams_sanity(self):
+        freq = {'th': 1.0, 'he': 1.0}
+        scorer = etao.NgramFrequencyScorer(freq)
+        self.assertEqual(
+            scorer.score('th'),
+            scorer.score('he')
         )
 
     def test_empty_table(self):
