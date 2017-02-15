@@ -36,10 +36,11 @@ class NgramFrequencyScorer:
         text_freq = ngram_frequency(text, self.ngram_length)
 
         # Get vector for each frequency table
-        text_vector = []
         freq_vector = []
-        for k in self.freq.keys():
-            freq_vector.append(self.freq.get(k))
-            text_vector.append(text_freq.get(k) or 0.0)
+        text_vector = []
+
+        for key in self.freq.keys():
+            freq_vector.append(self.freq[key])
+            text_vector.append(text_freq.get(key) or 0.0)
 
         return cosine_similarity(text_vector, freq_vector)

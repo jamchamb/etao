@@ -1,24 +1,27 @@
 """Frequency analysis, etc."""
+import collections
 import math
 
 # Non-alphabetic ASCII characters
 NON_ALPHAS = ''.join(chr(c) for c in range(256) if not chr(c).isalpha())
 
 
-def char_frequency(text, only_alpha=False):
+def char_frequency(text, only_alpha=True):
     """Return a table of character frequencies in the text.
-       Case insensitive; includes non-alphabetic characters
+       Case insensitive; excludes non-alphabetic characters
        by default."""
 
     return ngram_frequency(text, 1, only_alpha)
 
 
-def ngram_frequency(text, length, only_alpha=False):
+def ngram_frequency(text, length, only_alpha=True, preserve_format=True):
     """Return a table of n-gram frequencies in the text.
-       Case insensitive; includes non-alphabetic characters
-       by default."""
+       Case insensitive; excludes non-alphabetic characters
+       by default. Preserves separation of characters by
+       whitespace by default when creating n-grams with
+       a length greater than one."""
 
-    if only_alpha:
+    if only_alpha and not preserve_format:
         text = text.translate(None, NON_ALPHAS)
 
     text = text.lower()
@@ -26,12 +29,13 @@ def ngram_frequency(text, length, only_alpha=False):
     # Get all substrings of desired length (n-grams)
     ngrams = [text[i:i+length] for i in range(len(text) - (length - 1))]
 
-    ngram_count = {}
-    for ngram in ngrams:
-        if ngram in ngram_count:
-            ngram_count[ngram] += 1
-        else:
-            ngram_count[ngram] = 1
+    # Remove n-grams containing non-alphabetic characters if only_alpha
+    # is set and non-alphabetic characters weren't already removed due
+    # to preserve_format
+    if only_alpha and preserve_format:
+        ngrams = [ngram for ngram in ngrams if ngram.isalpha()]
+
+    ngram_count = dict(collections.Counter(ngrams))
 
     # Get frequency for each character counted
     text_freq = {x[0]: float(x[1])/len(ngrams) for x in ngram_count.items()}

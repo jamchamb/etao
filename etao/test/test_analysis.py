@@ -30,7 +30,7 @@ class TestFrequency(unittest.TestCase):
 
     def test_char_freq_only_alpha(self):
         self.assertEqual(
-            etao.char_frequency('a..a!a?   b', only_alpha=True),
+            etao.char_frequency('a..a!a?   b'),
             {'a': 0.75, 'b': 0.25}
         )
 
@@ -40,14 +40,20 @@ class TestFrequency(unittest.TestCase):
             {'th': 0.5, 'he': 0.5}
         )
 
-    def test_ngram_freq_only_alpha(self):
+    def test_ngram_freq_preserve_format(self):
         self.assertEqual(
-            etao.ngram_frequency('t h e!!', 2, only_alpha=True),
+            etao.ngram_frequency('t h e!!', 2),
+            {}
+        )
+
+    def test_ngram_freq_no_preserve_format(self):
+        self.assertEqual(
+            etao.ngram_frequency('t h e!!', 2, preserve_format=False),
             {'th': 0.5, 'he': 0.5}
         )
 
     def test_ngram_freq_symbols(self):
         self.assertEqual(
-            etao.ngram_frequency('wow!', 2),
+            etao.ngram_frequency('wow!', 2, only_alpha=False),
             {'wo': 1/3.0, 'ow': 1/3.0, 'w!': 1/3.0}
         )
