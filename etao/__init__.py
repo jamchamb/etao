@@ -9,7 +9,7 @@ from .pen import (letter_to_num, num_to_letter,
 from .ciphers import (Cipher, CaesarCipher, VigenereCipher,
                       SimpleSubstitutionCipher)
 
-from .codecs import (Codec, Transcoder, HexASCIICodec, Base64Codec,
+from .codecs import (Codec, Transcoder, BinASCIICodec, HexASCIICodec, Base64Codec,
                      PKCS7PaddingCodec, BlockCodec)
 
 from .analysis import char_frequency, ngram_frequency, hamming_distance

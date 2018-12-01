@@ -1,6 +1,7 @@
 """Encoder/decoder classes"""
 import base64
 import binascii
+from .bitwise import (bytes_to_bits, bits_to_bytes)
 
 
 class Codec:
@@ -27,6 +28,18 @@ class Transcoder(Codec):
 
     def decode(self, data):
         return self.incodec.encode(self.outcodec.decode(data))
+
+
+class BinASCIICodec(Codec):
+
+    def __init__(self):
+        pass
+
+    def encode(self, data):
+        return bytes_to_bits(data)
+
+    def decode(self, data):
+        return bits_to_bytes(data)
 
 
 class HexASCIICodec(Codec):
