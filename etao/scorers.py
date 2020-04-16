@@ -17,9 +17,9 @@ class NgramFrequencyScorer:
             raise ValueError("Empty frequency table")
 
         # Determine ngram length and ensure it's conistent throughout the table
-        ngram_length = len(freq.keys()[0])
+        ngram_length = len(list(freq.keys())[0])
 
-        for k in freq.keys():
+        for k in list(freq.keys()):
             if k != k.lower():
                 raise ValueError("Only use lower-case keys in frequency table")
             elif len(k) != ngram_length:
@@ -39,7 +39,7 @@ class NgramFrequencyScorer:
         freq_vector = []
         text_vector = []
 
-        for key in self.freq.keys():
+        for key in list(self.freq.keys()):
             freq_vector.append(self.freq[key])
             text_vector.append(text_freq.get(key) or 0.0)
 
