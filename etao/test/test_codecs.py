@@ -18,22 +18,22 @@ class TestHexCodec(unittest.TestCase):
 
     def test_htb(self):
         codec = etao.HexASCIICodec()
-        self.assertEqual(codec.decode('41424344'), 'ABCD')
+        self.assertEqual(codec.decode('41424344'), b'ABCD')
 
     def test_bth(self):
         codec = etao.HexASCIICodec()
-        self.assertEqual(codec.encode('ABCD'), '41424344')
+        self.assertEqual(codec.encode(b'ABCD'), '41424344')
 
 
 class TestBase64Codec(unittest.TestCase):
 
     def test_btb64(self):
         codec = etao.Base64Codec()
-        self.assertEqual(codec.encode('ETAOINSHRDLU'), 'RVRBT0lOU0hSRExV')
+        self.assertEqual(codec.encode(b'ETAOINSHRDLU'), 'RVRBT0lOU0hSRExV')
 
     def test_b64tb(self):
         codec = etao.Base64Codec()
-        self.assertEqual(codec.decode('RVRBT0lOU0hSRExV'), 'ETAOINSHRDLU')
+        self.assertEqual(codec.decode('RVRBT0lOU0hSRExV'), b'ETAOINSHRDLU')
 
 
 class TestTranscoder(unittest.TestCase):

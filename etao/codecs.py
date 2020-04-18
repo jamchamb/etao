@@ -48,7 +48,7 @@ class HexASCIICodec(Codec):
         pass
 
     def encode(self, data):
-        return binascii.hexlify(data)
+        return binascii.hexlify(data).decode()
 
     def decode(self, data):
         return binascii.unhexlify(data)
@@ -60,7 +60,7 @@ class Base64Codec(Codec):
         pass
 
     def encode(self, data):
-        return base64.b64encode(data)
+        return base64.b64encode(data).decode()
 
     def decode(self, data):
         return base64.b64decode(data)

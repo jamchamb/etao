@@ -1,9 +1,9 @@
 """Utilities"""
 import string
-import binascii
 
-PRINTABLE = string.ascii_letters + string.digits + \
-            string.punctuation + string.whitespace
+
+PRINTABLE = str(string.ascii_letters + string.digits +
+                string.punctuation + string.whitespace).encode('ascii')
 
 
 def escape_nonprintables(input_string):
@@ -13,10 +13,10 @@ def escape_nonprintables(input_string):
     result = ''
     for char in input_string:
         if (char not in PRINTABLE) or \
-           (char != ' ' and char in string.whitespace):
-            result += '\\x' + binascii.hexlify(char)
+           (char != b' ' and char in string.whitespace.encode('ascii')):
+            result += '\\x' + bytes([char]).hex()
         else:
-            result += char
+            result += chr(char)
     return result
 
 

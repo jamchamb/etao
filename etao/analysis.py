@@ -4,6 +4,7 @@ import math
 
 # Non-alphabetic ASCII characters
 NON_ALPHAS = ''.join(chr(c) for c in range(256) if not chr(c).isalpha())
+NON_ALPHAS_MAP = {ord(c): None for c in NON_ALPHAS}
 
 
 def char_frequency(text, only_alpha=True):
@@ -22,7 +23,7 @@ def ngram_frequency(text, length, only_alpha=True, preserve_format=True):
        a length greater than one."""
 
     if only_alpha and not preserve_format:
-        text = text.translate(None, NON_ALPHAS)
+        text = text.translate(NON_ALPHAS_MAP)
 
     text = text.lower()
 
