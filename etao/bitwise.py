@@ -4,10 +4,11 @@
 def xor_bytes(input_bytes, key_bytes):
     """XOR input bytes, repeating the XOR key as necessary."""
 
-    result = ''
-    for i in range(len(input_bytes)):
-        result += chr(ord(input_bytes[i]) ^ ord(key_bytes[i % len(key_bytes)]))
-    return result
+    result = []
+    for i, inb in enumerate(input_bytes):
+        result.append(inb ^ key_bytes[i % len(key_bytes)])
+
+    return bytes(result)
 
 
 def get_bit(byte, n):
