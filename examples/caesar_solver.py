@@ -24,7 +24,7 @@ def main():
 
     # Print the top 3 results
     for result in scored_shifts[0:3]:
-        print '"%s" (%02d%%)' % (result[1], int(result[0] * 100))
+        print('"%s" (%02d%%)' % (result[1], int(result[0] * 100)))
 
 
 if __name__ == "__main__":

@@ -8,13 +8,19 @@ etao
    :target: https://codecov.io/github/jamchamb/etao
 
 etao is a simple Python library that assists in the creation
-of cryptanalysis tools.
+of cryptanalysis tools. It takes care of common low-level tasks
+such as converting letters to numeric values or splitting a buffer
+into a bit stream or series of fixed-size blocks, as well as higher-level
+things like frequency analysis.
 
 Installation
 ------------
 Install with pip::
 
     pip install etao
+
+As of version 1.0.0 this library switched from Python 2 to Python 3; for
+Python 2 use version 0.6.0.
 
 Example Application
 -------------------
@@ -49,7 +55,7 @@ analysis functions and built-in ciphers.
 
      # Print the top 3 results
      for result in scored_shifts[0:3]:
-         print '"%s" (%02d%%)' % (result[1], int(result[0] * 100))
+         print('"%s" (%02d%%)' % (result[1], int(result[0] * 100)))
 
 
  if __name__ == "__main__":

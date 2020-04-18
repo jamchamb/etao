@@ -1,3 +1,4 @@
+# development dependencies
 cov-core>=1.15.0
 nose2>=0.6.2
 six>=1.10.0
