@@ -53,10 +53,10 @@ def bits_to_bytes(bit_array, bpb=8):
     if len(bit_array) % bpb != 0:
         raise ValueError("Number of bits must be a multiple of " + str(bpb))
 
-    result = ""
+    result = b""
     for i in range(0, len(bit_array), bpb):
         bits = [str(bits) for bits in bit_array[i:i+bpb]]
         bitstring = ''.join(bits)
-        result += chr(int(bitstring, 2))
+        result += bytes([int(bitstring, 2)])
 
     return result

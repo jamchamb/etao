@@ -36,6 +36,19 @@ class TestBase64Codec(unittest.TestCase):
         self.assertEqual(codec.decode('RVRBT0lOU0hSRExV'), b'ETAOINSHRDLU')
 
 
+class TestBinASCIICodec(unittest.TestCase):
+
+    def test_encode(self):
+        codec = etao.BinASCIICodec()
+        self.assertEqual(codec.encode(b'Hi'),
+                         [0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1])
+
+    def test_decode(self):
+        codec = etao.BinASCIICodec()
+        bit_array = [int(c) for c in '0101100101101111']
+        self.assertEqual(codec.decode(bit_array), b'Yo')
+
+
 class TestTranscoder(unittest.TestCase):
 
     def test_htb64(self):
@@ -50,22 +63,22 @@ class TestTranscoder(unittest.TestCase):
 class TestBitExtract(unittest.TestCase):
 
     def test_bitby_str(self):
-        self.assertEqual(etao.bits_to_bytes('0100100001101001'), 'Hi')
+        self.assertEqual(etao.bits_to_bytes('0100100001101001'), b'Hi')
 
     def test_bitby_array_str(self):
         bit_char_array = [c for c in '0100100001101001']
-        self.assertEqual(etao.bits_to_bytes(bit_char_array), 'Hi')
+        self.assertEqual(etao.bits_to_bytes(bit_char_array), b'Hi')
 
     def test_bitby_array_int(self):
         bit_array = [int(c) for c in '0100100001101001']
-        self.assertEqual(etao.bits_to_bytes(bit_array), 'Hi')
+        self.assertEqual(etao.bits_to_bytes(bit_array), b'Hi')
 
     def test_bits_per_byte(self):
-        self.assertEqual(etao.bits_to_bytes('1001010', bpb=7), 'J')
+        self.assertEqual(etao.bits_to_bytes('1001010', bpb=7), b'J')
 
     def test_bits_per_byte_bad(self):
         with self.assertRaises(ValueError):
-            self.assertEqual(etao.bits_to_bytes('1001010', bpb=6), 'J')
+            self.assertEqual(etao.bits_to_bytes('1001010', bpb=6), b'J')
 
     def test_bytbi(self):
         bit_array = [int(c) for c in '0100100001101001']
