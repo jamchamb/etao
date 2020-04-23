@@ -7,14 +7,14 @@ class TestHamming(unittest.TestCase):
 
     def test_hamming(self):
         self.assertEqual(
-            etao.hamming_distance('this is a test',
-                                  'wokka wokka!!!'),
+            etao.hamming_distance(b'this is a test',
+                                  b'wokka wokka!!!'),
             37
         )
 
     def test_hamming_len_mismatch(self):
         with self.assertRaises(ValueError):
-            etao.hamming_distance('abc', 'defg')
+            etao.hamming_distance(b'abc', b'defg')
 
 
 class TestFrequency(unittest.TestCase):

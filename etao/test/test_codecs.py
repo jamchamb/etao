@@ -82,67 +82,67 @@ class TestBitExtract(unittest.TestCase):
 
     def test_bytbi(self):
         bit_array = [int(c) for c in '0100100001101001']
-        self.assertEqual(etao.bytes_to_bits('Hi'), bit_array)
+        self.assertEqual(etao.bytes_to_bits(b'Hi'), bit_array)
 
 
 class TestPKCS7PadCodec(unittest.TestCase):
 
     def test_encode(self):
         codec = etao.PKCS7PaddingCodec(16)
-        self.assertEqual(codec.encode('YELLOW SUBMARINE'),
-                         'YELLOW SUBMARINE' + '\x10'*16)
+        self.assertEqual(codec.encode(b'YELLOW SUBMARINE'),
+                         b'YELLOW SUBMARINE' + b'\x10'*16)
 
     def test_encode_nothing(self):
         codec = etao.PKCS7PaddingCodec(16)
-        self.assertEqual(codec.encode(''), '\x10'*16)
+        self.assertEqual(codec.encode(b''), b'\x10'*16)
 
     def test_decode(self):
         codec = etao.PKCS7PaddingCodec(16)
-        self.assertEqual(codec.decode('YELLOW SUBMARINE' + '\x10'*16),
-                         'YELLOW SUBMARINE')
+        self.assertEqual(codec.decode(b'YELLOW SUBMARINE' + b'\x10'*16),
+                         b'YELLOW SUBMARINE')
 
     def test_decode_single_block(self):
         codec = etao.PKCS7PaddingCodec(16)
-        self.assertEqual(codec.decode('YELLOW SUBMARIN\x01'),
-                         'YELLOW SUBMARIN')
+        self.assertEqual(codec.decode(b'YELLOW SUBMARIN\x01'),
+                         b'YELLOW SUBMARIN')
 
     def test_decode_nothing(self):
         codec = etao.PKCS7PaddingCodec(16)
         with self.assertRaises(IndexError):
-            codec.decode('')
+            codec.decode(b'')
 
     def test_decode_invalid_size(self):
         codec = etao.PKCS7PaddingCodec(16)
         with self.assertRaises(ValueError):
-            codec.decode('YELLOW SUBMARINE' + '\x10'*15)
+            codec.decode(b'YELLOW SUBMARINE' + b'\x10'*15)
 
     def test_decode_invalid_padding(self):
         codec = etao.PKCS7PaddingCodec(16)
         with self.assertRaises(ValueError):
-            codec.decode('YELLOW SUBMARINE' + '\xFF'*16)
+            codec.decode(b'YELLOW SUBMARINE' + b'\xFF'*16)
 
     def test_decode_incosistent_padding(self):
         codec = etao.PKCS7PaddingCodec(16)
         with self.assertRaises(ValueError):
-            codec.decode('YELLOW SUBMARINE\x09' + '\x10'*15)
+            codec.decode(b'YELLOW SUBMARINE\x09' + b'\x10'*15)
 
 
 class TestBlockCodec(unittest.TestCase):
 
     def test_encode(self):
         codec = etao.BlockCodec(16)
-        self.assertEqual(codec.encode('DEADBEEFDEADBEEF' * 3),
-                         ['DEADBEEFDEADBEEF' for x in range(3)])
+        self.assertEqual(codec.encode(b'DEADBEEFDEADBEEF' * 3),
+                         [b'DEADBEEFDEADBEEF' for x in range(3)])
 
     def test_encode_nothing(self):
         codec = etao.BlockCodec(16)
-        self.assertEqual(codec.encode(''), [])
+        self.assertEqual(codec.encode(b''), [])
 
     def test_decode(self):
         codec = etao.BlockCodec(5)
-        blocks = ['HELLO', 'WORLD']
-        self.assertEqual(codec.decode(blocks), 'HELLOWORLD')
+        blocks = [b'HELLO', b'WORLD']
+        self.assertEqual(codec.decode(blocks), b'HELLOWORLD')
 
     def test_decode_nothing(self):
         codec = etao.BlockCodec(5)
-        self.assertEqual(codec.decode([]), '')
+        self.assertEqual(codec.decode([]), b'')

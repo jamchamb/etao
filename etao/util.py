@@ -12,11 +12,12 @@ def escape_nonprintables(input_string):
 
     result = ''
     for char in input_string:
+        char = bytes([char])
         if (char not in PRINTABLE) or \
-           (char != b' ' and char in string.whitespace.encode('ascii')):
-            result += '\\x' + bytes([char]).hex()
+           (char != b' ' and char.isspace()):
+            result += '\\x' + char.hex()
         else:
-            result += chr(char)
+            result += char.decode('ascii')
     return result
 
 

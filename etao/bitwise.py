@@ -16,11 +16,15 @@ def get_bit(byte, n):
        the least significant (last) bit and 7 referring to the most
        significant (first) bit."""
 
-    if type(byte) == str:
+    if type(byte) in [str, bytes]:
         if len(byte) != 1:
             raise ValueError("Expected a single byte")
-        byte = ord(byte)
-    elif type(byte) == int:
+
+        if type(byte) is str:
+            byte = ord(byte)
+        else:
+            byte = byte[0]
+    elif type(byte) is int:
         if byte < 0 or byte > 255:
             raise ValueError("Expected a value between 0 and 255")
     else:

@@ -71,9 +71,9 @@ def hamming_distance(left_bytes, right_bytes):
         raise ValueError("Length of both sequences must match")
 
     result = 0
-    for i in range(len(left_bytes)):
+    for left, right in zip(left_bytes, right_bytes):
         # Each 1 bit in the XOR represents a difference
-        diff = ord(left_bytes[i]) ^ ord(right_bytes[i])
+        diff = left ^ right
         for j in range(8):
             result += (diff >> j) & 1
 

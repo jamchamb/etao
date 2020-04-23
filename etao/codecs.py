@@ -73,7 +73,7 @@ class PKCS7PaddingCodec(Codec):
 
     def encode(self, data):
         pads = self.block_size - (len(data) % self.block_size)
-        return data + (chr(pads) * pads)
+        return data + (bytes([pads]) * pads)
 
     def decode(self, data):
         if len(data) % self.block_size != 0:
@@ -82,7 +82,7 @@ class PKCS7PaddingCodec(Codec):
         last_block = data[-self.block_size:]
 
         # Get padding amount
-        pads = ord(last_block[-1])
+        pads = last_block[-1]
 
         # Validate padding amount
         if pads > self.block_size:
@@ -93,8 +93,7 @@ class PKCS7PaddingCodec(Codec):
         for i in range(self.block_size - 1,
                        (orig_length % self.block_size) - 1,
                        -1):
-            cur_ord = ord(last_block[i])
-            if cur_ord != pads:
+            if last_block[i] != pads:
                 raise ValueError('Inconsistent padding bytes found')
 
         return data[:-pads]
@@ -113,4 +112,4 @@ class BlockCodec(Codec):
         return blocks
 
     def decode(self, data):
-        return ''.join(data)
+        return b''.join(data)
