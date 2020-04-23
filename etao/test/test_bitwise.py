@@ -12,7 +12,15 @@ class TestBitExtraction(unittest.TestCase):
         self.assertEqual(etao.get_bit(128, 7), 1)
 
     def test_get_bit_char(self):
+        self.assertEqual(etao.get_bit('A', 0), 1)
+
+    def test_get_bit_byte(self):
         self.assertEqual(etao.get_bit(b'A', 0), 1)
+
+    def test_whole_byte(self):
+        get_bits = [etao.get_bit(0xA5, i) for i in range(7, -1, -1)]
+        all_bits = [1, 0, 1, 0, 0, 1, 0, 1]
+        self.assertEqual(all_bits, get_bits)
 
     def test_get_bit_over_255(self):
         with self.assertRaises(ValueError):
