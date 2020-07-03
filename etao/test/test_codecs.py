@@ -146,3 +146,12 @@ class TestBlockCodec(unittest.TestCase):
     def test_decode_nothing(self):
         codec = etao.BlockCodec(5)
         self.assertEqual(codec.decode([]), b'')
+
+    def test_encode_padded(self):
+        codec = etao.BlockCodec(16, right_pad=True)
+        self.assertEqual(
+            codec.encode(b'YELLOW SUBMARINEDEADBEEF'),
+            [
+                b'YELLOW SUBMARINE',
+                b'DEADBEEF\x00\x00\x00\x00\x00\x00\x00\x00'
+            ])
