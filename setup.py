@@ -6,10 +6,11 @@ long_description = open(
 
 setup(
     name='etao',
-    version='1.0.1',
+    version='1.1.0',
 
     description='Simple cryptanalysis library',
     long_description=long_description,
+    long_description_content_type='text/x-rst',
 
     url='https://github.com/jamchamb/etao',
 
