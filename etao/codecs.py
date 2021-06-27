@@ -102,18 +102,21 @@ class PKCS7PaddingCodec(Codec):
 class BlockCodec(Codec):
     """Break data up into blocks of a given size (no padding at the end by default)"""
 
-    def __init__(self, block_size, right_pad=False, pad_byte=b'\x00'):
+    def __init__(self, block_size, right_pad=None):
         self.block_size = block_size
+
+        if right_pad is not None and len(right_pad) != 1:
+            raise ValueError('right_pad must be one byte')
+
         self.right_pad = right_pad
-        self.pad_byte = pad_byte
 
     def encode(self, data):
         step = self.block_size
         blocks = [data[i:i+step] for i in range(0, len(data), step)]
 
-        if self.right_pad and len(blocks[-1]) < self.block_size:
+        if self.right_pad is not None and len(blocks[-1]) < self.block_size:
             pad_amount = self.block_size - len(blocks[-1])
-            blocks[-1] = blocks[-1] + (self.pad_byte * pad_amount)
+            blocks[-1] = blocks[-1] + (self.right_pad * pad_amount)
 
         return blocks
 
