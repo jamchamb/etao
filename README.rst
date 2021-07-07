@@ -2,10 +2,6 @@ etao
 ====
 .. image:: https://badge.fury.io/py/etao.svg
     :target: https://badge.fury.io/py/etao
-.. image:: https://travis-ci.com/jamchamb/etao.svg?branch=master
-    :target: https://travis-ci.com/jamchamb/etao
-.. image:: https://img.shields.io/codecov/c/github/jamchamb/etao.svg?maxAge=2592000
-   :target: https://codecov.io/github/jamchamb/etao
 
 etao is a simple Python library that assists in the creation
 of cryptanalysis tools. It takes care of common low-level tasks
