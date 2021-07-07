@@ -33,10 +33,28 @@ def contains_nonprintables(input_string):
 def preview_crack_buf(cracked, unknown_char=u"\U0001F47B"):
     """Print out array of characters where unknown values are
     represented by None"""
+    if type(cracked) is not list:
+        raise TypeError('input buffer must be represented as a list')
+
     preview = ''
     for j in range(len(cracked)):
-        if cracked[j] is None:
+        cur_char = cracked[j]
+
+        if cur_char is None:
             preview += unknown_char
+        elif type(cur_char) is int:
+            if cur_char >= 256:
+                raise ValueError('byte value must be less than 256')
+            preview += chr(cur_char)
+        elif type(cur_char) is bytes:
+            if len(cur_char) != 1:
+                raise ValueError('must be one byte per entry')
+            preview += chr(ord(cur_char))
+        elif type(cur_char) is str:
+            if len(cur_char) != 1:
+                raise ValueError('must be one char per entry')
+            preview += cur_char
         else:
-            preview += chr(cracked[j])
+            raise TypeError('unsupported character type')
+
     return preview

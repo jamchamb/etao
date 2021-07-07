@@ -20,4 +20,4 @@ from .bitwise import (get_bit, get_bits,
                       bits_to_bytes, bytes_to_bits,
                       xor_bytes)
 
-from .util import escape_nonprintables, contains_nonprintables
+from .util import escape_nonprintables, contains_nonprintables, preview_crack_buf
