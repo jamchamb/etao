@@ -100,7 +100,8 @@ class PKCS7PaddingCodec(Codec):
 
 
 class BlockCodec(Codec):
-    """Break data up into blocks of a given size (no padding at the end by default)"""
+    """Break data up into blocks of a given size
+    (no padding at the end by default)"""
 
     def __init__(self, block_size, right_pad=None):
         self.block_size = block_size
